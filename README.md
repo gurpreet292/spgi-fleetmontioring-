@@ -1,45 +1,16 @@
-Group 1 Assignment Spec – Analytics Dashboard
-System
-Objective
-Build a scalable analytics dashboard that visualizes business data using mock APIs. The focus is
-architecture, data transformation, performance optimization, and clean system design.
-Core Functional Requirements
-• Responsive layout with header, collapsible sidebar, and main content area.
-• React Router based navigation.
-• Overview page with 4 KPI cards.
-• At least 3 chart types: Line, Bar, Pie.
-• Reusable chart components with loading, empty, and error states.
-• Global filters: date range, category dropdown, debounced search.
-Data Layer Requirements
-• Create a service layer to simulate APIs with 1 to 2 second delay.
-• Simulate random API failures.
-• Separate transformation logic from UI.
-• No direct usage of raw API data inside chart components.
-Performance Requirements
-• Use useMemo for derived data.
-• Use React.memo where appropriate.
-• Use useCallback to stabilize function references.
-• Lazy load heavy components.
-• Avoid unnecessary re-renders.
-Error Handling Requirements
-• Implement a global error boundary.
-• Graceful fallback UI.
-• Retry mechanism for failed API calls.
-Technical Constraints
-• Functional components only.
-• No prop drilling deeper than 2 levels.
-• At least 2 custom hooks.
-• Clean modular folder structure.
-• No console errors.
-Deliverables
-• GitHub repository link.
-• Detailed README explaining architecture decisions.
-• Explanation of performance optimizations.
-• Known limitations section.
-Evaluation Criteria
-• Architecture clarity – 25%
-• State management – 20%
-• Performance optimization – 15%
-• Error handling – 15%
-• Code cleanliness – 15%
-• UI polish – 10%
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
