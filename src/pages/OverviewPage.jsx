@@ -9,6 +9,8 @@ import { ChartContainer } from '../components/charts/ChartContainer';
 import BarChartComponent from '../components/charts/BarChartComponent';
 import LineChartComponent from '../components/charts/LineChartComponent';
 import PieChartComponent from '../components/charts/PieChartComponent';
+import GlobalFilters from '../Components/filters/GlobalFilters';
+import SearchInput from '../Components/filters/SearchInput';
 
 const OverviewPage = () => {
   // Access global filters state
@@ -56,6 +58,12 @@ const OverviewPage = () => {
             🌍 Environmental Impact Dashboard
           </h1>
           <p className="text-gray-600">Track our global sustainability initiatives and environmental impact</p>
+        </div>
+
+        {/* Filters */}
+        <div className="flex gap-4 mb-6">
+          <SearchInput />
+          <GlobalFilters />
         </div>
 
         <KpiGrid kpiData={kpiData} />
