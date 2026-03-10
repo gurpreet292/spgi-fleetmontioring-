@@ -1,34 +1,16 @@
-# 🌍 Environmental Impact Analytics Dashboard
+# React + Vite
 
-A beautiful, green-themed analytics dashboard for tracking environmental impact metrics.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## ✨ Features
+Currently, two official plugins are available:
 
-- 📊 **Interactive Charts**: Bar, Line, and Pie charts visualizing environmental data
-- 💚 **8 KPI Metrics**: CO₂ Prevented, Trees Planted, Pollution Reduced, Water Saved, Waste Recycled, Energy Generated, Active Projects, Avg CO₂/Project
-- 🌿 **Beautiful Green UI**: Modern gradient design with emerald and teal colors
-- 📈 **Real-time Filtering**: Filter data by region, category, and search
-- 🎨 **Responsive Design**: Works on all devices
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 🚀 Getting Started
+## React Compiler
 
-### Installation
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-\`\`\`bash
-npm install
-npm run dev
-\`\`\`
+## Expanding the ESLint configuration
 
-Open: http://localhost:5173
-
-## 🛠️ Tech Stack
-
-React • Vite • Recharts • Tailwind CSS • Lucide Icons
-
-## 📊 Environmental Data
-
-CO₂ Saved • Trees Planted • Pollution Reduced • Water Saved • Waste Recycled • Energy Generated
-
----
-
-Made with 💚 for a sustainable future 🌍
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

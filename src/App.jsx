@@ -1,18 +1,19 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import { FilterProvider } from './context/FilterContext';
-import OverviewPage from './pages/OverviewPage';
+import AppRouter from './routes/AppRouter';
+import ErrorBoundaryFallback from './Components/common/ErrorBoundaryFallback';
 import './index.css';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
+    <ErrorBoundary FallbackComponent={ErrorBoundaryFallback} onReset={() => window.location.reload()}>
       <FilterProvider>
-        <OverviewPage/>
+        <AppRouter />
       </FilterProvider>
-    </BrowserRouter>
+    </ErrorBoundary>
   );
-}
+};
 
 export default App;
