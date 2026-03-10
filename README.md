@@ -1,16 +1,97 @@
-# React + Vite
+# 🌍 Environmental Impact Analytics Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful, green-themed analytics dashboard for tracking environmental impact metrics.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📊 **Interactive Charts**: Bar, Line, and Pie charts visualizing environmental data
+- 💚 **8 KPI Metrics**:
+  - Total CO₂ Prevented
+  - Trees Planted
+  - Pollution Reduced
+  - Water Saved
+  - Waste Recycled
+  - Energy Generated
+  - Active Eco Projects
+  - Average CO₂ per Project
 
-## React Compiler
+- 🌿 **Beautiful Green UI**: Modern gradient design with emerald and teal colors
+- 📈 **Real-time Filtering**: Filter data by region, category, and search
+- 🎨 **Responsive Design**: Works on desktop, tablet, and mobile devices
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open your browser and visit: `http://localhost:5173`
+
+## 🛠️ Tech Stack
+
+- **React** - UI Framework
+- **Vite** - Build tool
+- **Recharts** - Chart library
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icons
+
+## 📊 Environmental Data Tracked
+
+- CO₂ Saved (Tons)
+- Trees Planted
+- Pollution Reduced (kg)
+- Water Saved (Kiloliters)
+- Waste Recycled (kg)
+- Energy Generated (MWh)
+
+## 🌱 Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── charts/        # Chart components
+│   │   ├── kpi/           # KPI card components
+│   │   └── context/       # Context providers
+│   ├── pages/             # Page components
+│   ├── services/          # API services and mock data
+│   ├── utils/             # Utility functions
+│   └── hooks/             # Custom React hooks
+├── public/                # Static assets
+└── package.json           # Dependencies
+```
+
+## 🎨 Theme Colors
+
+- Primary: Emerald Green (#10b981)
+- Secondary: Teal (#14b8a6)
+- Background: Gradient from green to emerald
+
+## 👥 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+---
+
+Made with 💚 for a sustainable future 🌍
