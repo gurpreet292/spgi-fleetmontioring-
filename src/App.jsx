@@ -3,6 +3,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { FilterProvider } from './context/FilterContext';
 import AppRouter from './routes/AppRouter';
 import ErrorBoundaryFallback from './Components/common/ErrorBoundaryFallback';
+import './index.css';
+import './App.css';
 
 const App = () => {
   return (
