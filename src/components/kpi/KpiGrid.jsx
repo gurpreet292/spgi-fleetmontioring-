@@ -33,33 +33,6 @@ const KpiGrid = ({ kpiData }) => {
         trend="+10%" 
         color="cyan"
       />
-      <KpiCard 
-        title="Waste Recycled" 
-        value={kpiData.totalWasteRecycled} 
-        suffix=" kg" 
-        trend="+18%" 
-        color="lime"
-      />
-      <KpiCard 
-        title="Energy Generated" 
-        value={(kpiData.totalEnergyGenerated / 1000).toFixed(1)} 
-        suffix=" MWh" 
-        trend="+22%" 
-        color="emerald"
-      />
-      <KpiCard 
-        title="Active Eco Projects" 
-        value={kpiData.totalProjects} 
-        trend="+5%" 
-        color="green"
-      />
-      <KpiCard 
-        title="Avg CO₂/Project" 
-        value={kpiData.avgImpact} 
-        suffix=" Tons" 
-        trend="+7%" 
-        color="teal"
-      />
     </div>
   );
 };

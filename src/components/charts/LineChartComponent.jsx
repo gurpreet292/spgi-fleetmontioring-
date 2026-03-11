@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip,Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 const LineChartComponent = React.memo(({ data }) => (
   <ResponsiveContainer width="100%" height="100%">
@@ -8,6 +8,13 @@ const LineChartComponent = React.memo(({ data }) => (
       <XAxis dataKey="name" tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
       <YAxis tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
       <Tooltip contentStyle={{borderRadius: '8px', border: 'none'}} />
+      <Legend
+  iconType="circle"
+  wrapperStyle={{
+    fontSize: '14px',
+    paddingTop: '10px'
+  }}
+/>
       {/* Changed to Forest Green */}
       <Line type="monotone" dataKey="value" stroke="#059669" strokeWidth={3} dot={{r: 4, fill: '#059669', strokeWidth: 0}} />
     </LineChart>
