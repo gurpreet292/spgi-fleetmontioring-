@@ -50,14 +50,14 @@ const OverviewPage = () => {
   const pieData = useMemo(() => formatPieChartData(filteredData), [filteredData]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
       <div className="space-y-6 max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent mb-2">
             🌍 Environmental Impact Dashboard
           </h1>
-          <p className="text-gray-600">Track our global sustainability initiatives and environmental impact</p>
+          <p className="text-gray-600 dark:text-gray-400">Track our global sustainability initiatives and environmental impact</p>
         </div>
 
         {/* Filters */}

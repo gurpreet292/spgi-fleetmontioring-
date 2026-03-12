@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip,Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 const BarChartComponent = React.memo(({ data }) => (
   <ResponsiveContainer width="100%" height="100%">
@@ -8,6 +8,13 @@ const BarChartComponent = React.memo(({ data }) => (
       <XAxis dataKey="name" tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
       <YAxis tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
       <Tooltip cursor={{fill: '#f3f4f6'}} contentStyle={{borderRadius: '8px', border: 'none'}} />
+      <Legend
+  iconType="circle"
+  wrapperStyle={{
+    fontSize: '14px',
+    paddingTop: '10px'
+  }}
+/>
       {/* Changed to Emerald Green */}
       <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]} barSize={40} /> 
     </BarChart>

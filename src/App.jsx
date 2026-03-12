@@ -3,16 +3,19 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { FilterProvider } from './context/FilterContext';
 import AppRouter from './routes/AppRouter';
 import ErrorBoundaryFallback from './Components/common/ErrorBoundaryFallback';
+import { ThemeProvider } from "./components/context/ThemeContext";
 import './index.css';
 import './App.css';
 
 const App = () => {
   return (
-    <ErrorBoundary FallbackComponent={ErrorBoundaryFallback} onReset={() => window.location.reload()}>
-      <FilterProvider>
-        <AppRouter />
-      </FilterProvider>
-    </ErrorBoundary>
+  <ErrorBoundary FallbackComponent={ErrorBoundaryFallback}>
+  <ThemeProvider>
+    <FilterProvider>
+      <AppRouter />
+    </FilterProvider>
+  </ThemeProvider>
+</ErrorBoundary>
   );
 };
 
