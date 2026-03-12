@@ -1,24 +1,28 @@
-import { useState } from "react";
 import { FaUser, FaBriefcase } from "react-icons/fa";
 import { MdLock } from "react-icons/md";
 import { FiArrowRight } from "react-icons/fi";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const roles = [
   "Admin",
-  "Waste Manager",
-  "Field Officer",
+  "Manager",
   "Analyst",
-  "Supervisor",
 ];
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
-    username: "",
-    role: "Admin",
-    password: "",
-    remember: false,
+      name: "",
+      email: "",
+      role: "Admin",
+      password: "",
+      remember: false,
   });
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -28,11 +32,60 @@ export default function LoginForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login submitted:", form);
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+ });  
+
+ const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const nameRegex = /^[A-Z][a-zA-Z\s]*$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@spgi\.com$/;
+
+  let newErrors = { name: "", email: "" };
+  let valid = true;
+
+  // Validate Name
+  if (!nameRegex.test(form.name)) {
+    newErrors.name =
+      "Name must start with a capital letter and contain only alphabets.";
+    valid = false;
+  }
+
+  // Validate Email (only company email allowed)
+  if (!emailRegex.test(form.email)) {
+    newErrors.email =
+      "Only company email addresses (@spgi.com) are allowed.";
+    valid = false;
+  }
+
+  setErrors(newErrors);
+
+  if (!valid) return;
+
+  const userData = {
+    name: form.name,
+    email: form.email,
+    role: form.role,
   };
 
+  login(userData);
+
+  const routes = {
+    Admin: "/dashboard",
+    Analyst: "/analytics",
+    "Manager": "/operations"
+  };
+
+ 
+
+  navigate(routes[form.role] || "/dashboard");
+};
+  
+
+  
+  
   return (
     /* On mobile: overlaps the green banner with negative margin + rounded top */
     <div className="w-full lg:w-1/2 flex items-start justify-center bg-gray-100 lg:min-h-screen px-4 lg:py-12
@@ -49,24 +102,57 @@ export default function LoginForm() {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
+          {/* Full Name */}
+<div className="flex flex-col gap-1.5">
+  <label className="text-sm font-bold text-gray-800">
+    Full Name
+  </label>
+
+  <div className="flex items-center gap-3 border border-gray-200 rounded-xl px-4 py-3 bg-white focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all">
+    <FaUser className="text-gray-400 text-base shrink-0" />
+
+    <input
+      type="text"
+      name="name"
+      value={form.name}
+      onChange={handleChange}
+      placeholder="Enter your full name"
+      pattern="[A-Z][a-zA-Z\s]*"
+      title="Name must start with a capital letter"
+      className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none"
+     required
+    />
+    {errors.name && (
+      <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+    )}
+  </div>
+</div>
+
           {/* Username or Email */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-bold text-gray-800">
-              Username or Email
-            </label>
-            <div className="flex items-center gap-3 border border-gray-200 rounded-xl px-4 py-3 bg-white focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all">
-              <FaUser className="text-gray-400 text-base shrink-0" />
-              <input
-                type="text"
-                name="username"
-                value={form.username}
-                onChange={handleChange}
-                placeholder="Enter your username"
-                className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none"
-                required
-              />
-            </div>
-          </div>
+<div className="flex flex-col gap-1.5">
+  <label className="text-sm font-bold text-gray-800">
+    Email Address
+  </label>
+
+  <div className="flex items-center gap-3 border border-gray-200 rounded-xl px-4 py-3 bg-white focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all">
+    <FaUser className="text-gray-400 text-base shrink-0" />
+
+    <input
+      type="email"
+      name="email"
+      value={form.email}
+      onChange={handleChange}
+      placeholder="Enter your email"
+      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+      title="Enter a valid email address"
+      className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none"
+      required
+    />
+    {errors.email && (
+      <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+    )}
+  </div>
+</div>
 
           {/* Select Role */}
           <div className="flex flex-col gap-1.5">
