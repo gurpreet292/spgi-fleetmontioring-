@@ -11,7 +11,7 @@ export const navigation = [
   name: "Dashboard",
   path: "/dashboard",
   icon: LayoutDashboard,
-  roles: ["Admin","Manager","Analyst"],
+  roles: ["Admin"],
   feature: "dashboard"
 },
 
@@ -35,7 +35,7 @@ export const navigation = [
   name: "Settings",
   path: "/settings",
   icon: Settings,
-  roles: ["Admin"],
+  roles: ["Admin","Manager","Analyst"],
   feature: "settings"
 }
 
