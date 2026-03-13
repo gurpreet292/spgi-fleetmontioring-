@@ -54,10 +54,10 @@ const OverviewPage = () => {
       <div className="space-y-6 max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent mb-2">
-            🌍 Environmental Impact Dashboard
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">Track our global sustainability initiatives and environmental impact</p>
+          <h1 className="text-4xl font-bold text-green-600 text-center w-full">
+              Performance Analytics Dashboard
+           </h1>
+          <p className="flex flex-col items-center justify-center text-center"> Track our global sustainability initiatives and environmental impact</p>
         </div>
 
         {/* Filters */}
