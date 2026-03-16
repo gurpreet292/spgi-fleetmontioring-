@@ -1,25 +1,31 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip,Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
+import {
+LineChart,
+Line,
+XAxis,
+YAxis,
+CartesianGrid,
+Tooltip,
+ResponsiveContainer
+} from "recharts";
 
-const LineChartComponent = React.memo(({ data }) => (
-  <ResponsiveContainer width="100%" height="100%">
-    <LineChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-      <XAxis dataKey="name" tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
-      <YAxis tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
-      <Tooltip contentStyle={{borderRadius: '8px', border: 'none'}} />
-      <Legend
-  iconType="circle"
-  wrapperStyle={{
-    fontSize: '14px',
-    paddingTop: '10px'
-  }}
-/>
-      {/* Changed to Forest Green */}
-      <Line type="monotone" dataKey="value" stroke="#059669" strokeWidth={3} dot={{r: 4, fill: '#059669', strokeWidth: 0}} />
-    </LineChart>
+const data = [
+ { name: "12 Feb", value: 4000 },
+ { name: "13 Feb", value: 3500 },
+ { name: "14 Feb", value: 5000 },
+ { name: "15 Feb", value: 4200 },
+ { name: "16 Feb", value: 4800 }
+];
+
+export default function LineChartComponent() {
+ return (
+  <ResponsiveContainer width="100%" height={300}>
+   <LineChart data={data}>
+    <CartesianGrid strokeDasharray="3 3" />
+    <XAxis dataKey="name" />
+    <YAxis />
+    <Tooltip />
+    <Line type="monotone" dataKey="value" stroke="#16a34a" strokeWidth={3}/>
+   </LineChart>
   </ResponsiveContainer>
-));
-
-LineChartComponent.displayName = 'LineChartComponent';
-export default LineChartComponent;
+ );
+}
