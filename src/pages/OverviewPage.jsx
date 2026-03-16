@@ -11,6 +11,7 @@ import LineChartComponent from '../components/charts/LineChartComponent';
 import PieChartComponent from '../components/charts/PieChartComponent';
 import GlobalFilters from '../Components/filters/GlobalFilters';
 import SearchInput from '../Components/filters/SearchInput';
+import DataRangePicker from '../Components/filters/DataRangePicker';
 
 const OverviewPage = () => {
   // Access global filters state
@@ -39,9 +40,27 @@ const OverviewPage = () => {
         (item.region || '').toLowerCase().includes((filters.search || '').toLowerCase()) ||
         (item.category || '').toLowerCase().includes((filters.search || '').toLowerCase())
       );
-      return matchCategory && matchSearch;
+
+      const hasDateRange =
+        filters?.dateRange &&
+        filters?.dateRange.startDate &&
+        filters?.dateRange.endDate;
+
+      let matchDateRange = true;
+      if (hasDateRange) {
+        const itemDate = new Date(item.date);
+        const startDate = new Date(filters.dateRange.startDate);
+        const endDate = new Date(filters.dateRange.endDate);
+
+        startDate.setHours(0, 0, 0, 0);
+        endDate.setHours(23, 59, 59, 999);
+
+        matchDateRange = itemDate >= startDate && itemDate <= endDate;
+      }
+
+      return matchCategory && matchSearch && matchDateRange;
     });
-  }, [rawData, filters.category, filters.search]);
+  }, [rawData, filters.category, filters.search, filters.dateRange]);
 
   // Transform data for charts (Memoized for performance)
   const kpiData = useMemo(() => calculateKPIs(filteredData), [filteredData]);
@@ -57,13 +76,14 @@ const OverviewPage = () => {
           <h1 className="text-4xl font-bold text-green-600 text-center w-full">
               Performance Analytics Dashboard
            </h1>
-          <p className="flex flex-col items-center justify-center text-center"> Track our global sustainability initiatives and environmental impact</p>
+          <p className="flex flex-col items-center justify-center text-center text-gray-700 dark:text-gray-300"> Track our global sustainability initiatives and environmental impact</p>
         </div>
 
         {/* Filters */}
         <div className="flex gap-4 mb-6">
           <SearchInput />
           <GlobalFilters />
+          <DataRangePicker withGranularity />
         </div>
 
         <KpiGrid kpiData={kpiData} />
@@ -77,7 +97,7 @@ const OverviewPage = () => {
             <LineChartComponent data={lineData} />
           </ChartContainer>
           
-          <ChartContainer title="🌎 Projects by Region" isLoading={isLoading} error={error} isEmpty={pieData.length === 0} onRetry={handleRetry}>
+          <ChartContainer title="Recyclable Materials" isLoading={isLoading} error={error} isEmpty={pieData.length === 0} onRetry={handleRetry}>
             <PieChartComponent data={pieData} />
           </ChartContainer>
         </div>

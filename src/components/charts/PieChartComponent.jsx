@@ -16,12 +16,12 @@ const data = [
 
 const COLORS = ["#4F6DB8", "#16A34A", "#C89B2E", "#E4572E"];
 
-export default function PieChartComponent() {
+export default function PieChartComponent({ data: chartData = data }) {
  return (
   <ResponsiveContainer width="100%" height={300}>
    <PieChart>
     <Pie
-     data={data}
+    data={chartData}
      dataKey="value"
      cx="50%"
      cy="50%"
@@ -29,13 +29,16 @@ export default function PieChartComponent() {
      outerRadius={90}
      paddingAngle={3}
     >
-     {data.map((entry, index) => (
+    {chartData.map((entry, index) => (
       <Cell key={index} fill={COLORS[index]} />
      ))}
     </Pie>
 
-    <Tooltip />
-    <Legend verticalAlign="bottom"/>
+        <Tooltip />
+        <Legend
+            verticalAlign="bottom"
+            formatter={(value) => <span style={{ color: "#94a3b8" }}>{value}</span>}
+        />
    </PieChart>
   </ResponsiveContainer>
  );

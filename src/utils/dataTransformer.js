@@ -57,3 +57,23 @@ export const formatPieChartData = (data) => {
   }, {});
   return Object.keys(grouped).map(key => ({ name: key, value: grouped[key] }));
 };
+
+export const formatWasteCollectionData = (data) => {
+  if (!data || data.length === 0) return [];
+
+  const grouped = data.reduce((acc, curr) => {
+    const date = curr.date;
+    if (!acc[date]) {
+      acc[date] = { date, waste: 0, recycled: 0 };
+    }
+
+    const recycled = curr.wasteRecycled || 0;
+    const pollutionReduced = curr.pollutionReduced || 0;
+
+    acc[date].recycled += recycled;
+    acc[date].waste += recycled + pollutionReduced;
+    return acc;
+  }, {});
+
+  return Object.values(grouped).sort((a, b) => new Date(a.date) - new Date(b.date));
+};

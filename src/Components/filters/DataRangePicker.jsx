@@ -1,28 +1,155 @@
-import { useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { CalendarDays, ChevronDown } from "lucide-react";
 import { DateRange } from "react-date-range";
+import { format, subDays } from "date-fns";
+import { FilterContext } from "../../context/FilterContext";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
-export default function DateRangePicker() {
+const PRESETS = [
+  { label: "Today", getRange: () => ({ startDate: new Date(), endDate: new Date() }) },
+  { label: "Last 7 Days", getRange: () => ({ startDate: subDays(new Date(), 6), endDate: new Date() }) },
+  { label: "Last 30 Days", getRange: () => ({ startDate: subDays(new Date(), 29), endDate: new Date() }) },
+];
+
+const normalizeDateRange = (dateRangeValue) => {
+  if (
+    dateRangeValue &&
+    typeof dateRangeValue === "object" &&
+    dateRangeValue.startDate &&
+    dateRangeValue.endDate
+  ) {
+    return {
+      startDate: new Date(dateRangeValue.startDate),
+      endDate: new Date(dateRangeValue.endDate),
+    };
+  }
+
+  return {
+    startDate: subDays(new Date(), 6),
+    endDate: new Date(),
+  };
+};
+
+export default function DataRangePicker({ withGranularity = false, className = "" }) {
+  const { filters = {}, setFilters } = useContext(FilterContext) || {};
+  const containerRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const normalizedRange = useMemo(
+    () => normalizeDateRange(filters?.dateRange),
+    [filters?.dateRange]
+  );
 
   const [state, setState] = useState([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: normalizedRange.startDate,
+      endDate: normalizedRange.endDate,
       key: "selection"
     }
   ]);
 
+  useEffect(() => {
+    setState([
+      {
+        startDate: normalizedRange.startDate,
+        endDate: normalizedRange.endDate,
+        key: "selection"
+      }
+    ]);
+  }, [normalizedRange]);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
+  const selectedRange = state[0];
+  const rangeLabel = `${format(selectedRange.startDate, "dd MMM yyyy")} - ${format(
+    selectedRange.endDate,
+    "dd MMM yyyy"
+  )}`;
+
+  const updateRange = (range) => {
+    setState([
+      {
+        ...range,
+        key: "selection"
+      }
+    ]);
+
+    if (setFilters) {
+      setFilters((prev) => ({
+        ...prev,
+        dateRange: {
+          startDate: range.startDate,
+          endDate: range.endDate
+        }
+      }));
+    }
+  };
+
   return (
-    <div className="bg-white p-2 rounded-lg shadow">
+    <div ref={containerRef} className={`relative flex items-center gap-3 flex-wrap ${className}`}>
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="inline-flex items-center gap-2 rounded-lg border border-green-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-700 dark:text-gray-200 shadow-sm hover:border-green-300 dark:hover:border-green-500 hover:shadow transition"
+      >
+        <CalendarDays className="h-4 w-4 text-green-600" />
+        <span className="font-medium">{rangeLabel}</span>
+        <ChevronDown className={`h-4 w-4 text-gray-500 dark:text-gray-300 transition ${isOpen ? "rotate-180" : ""}`} />
+      </button>
 
-      <DateRange
-        editableDateInputs={true}
-        onChange={(item) => setState([item.selection])}
-        moveRangeOnFirstSelection={false}
-        ranges={state}
-      />
+      {withGranularity && (
+        <select
+          value={filters?.timeGranularity || "Daily"}
+          onChange={(e) =>
+            setFilters?.((prev) => ({
+              ...prev,
+              timeGranularity: e.target.value
+            }))
+          }
+          className="rounded-lg border border-green-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-700 dark:text-gray-200 shadow-sm hover:border-green-300 dark:hover:border-green-500 focus:border-green-500 focus:ring-2 focus:ring-green-500"
+        >
+          <option>Daily</option>
+          <option>Weekly</option>
+          <option>Monthly</option>
+        </select>
+      )}
 
+      {isOpen && (
+        <div className="absolute left-0 top-[calc(100%+8px)] z-50 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 shadow-2xl">
+          <div className="mb-3 flex flex-wrap gap-2">
+            {PRESETS.map((preset) => (
+              <button
+                key={preset.label}
+                type="button"
+                onClick={() => updateRange(preset.getRange())}
+                className="rounded-md border border-gray-200 dark:border-gray-600 px-2.5 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-200 hover:border-green-300 dark:hover:border-green-500 hover:text-green-700 dark:hover:text-green-400"
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+
+          <DateRange
+            editableDateInputs
+            onChange={(item) => updateRange(item.selection)}
+            moveRangeOnFirstSelection={false}
+            ranges={state}
+            months={1}
+            direction="horizontal"
+            rangeColors={["#16a34a"]}
+          />
+        </div>
+      )}
     </div>
   );
 }

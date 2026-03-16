@@ -158,57 +158,56 @@
   transform: translateY(0);
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .settings-page {
-    color: #f3f4f6;
-  }
+/* Dark Mode Support (class-based for app theme toggle) */
+.dark .settings-page {
+  color: #f3f4f6;
+}
 
-  .settings-title {
-    color: #4ade80;
-  }
+.dark .settings-title {
+  color: #4ade80;
+}
 
-  .settings-subtitle {
-    color: #9ca3af;
-  }
+.dark .settings-subtitle {
+  color: #9ca3af;
+}
 
-  .settings-card {
-    background: #1f2937;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-  }
+.dark .settings-card {
+  background: #1f2937;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid #374151;
+}
 
-  .settings-card h3 {
-    color: #f9fafb;
-    border-bottom-color: #374151;
-  }
+.dark .settings-card h3 {
+  color: #f9fafb;
+  border-bottom-color: #374151;
+}
 
-  .form-grid label {
-    color: #d1d5db;
-  }
+.dark .form-grid label {
+  color: #d1d5db;
+}
 
-  .form-grid input,
-  .form-grid select {
-    background: #111827;
-    border-color: #374151;
-    color: #f3f4f6;
-  }
+.dark .form-grid input,
+.dark .form-grid select {
+  background: #111827;
+  border-color: #374151;
+  color: #f3f4f6;
+}
 
-  .form-grid input[readonly] {
-    background-color: #1f2937;
-    color: #9ca3af;
-  }
+.dark .form-grid input[readonly] {
+  background-color: #1f2937;
+  color: #9ca3af;
+}
 
-  .toggle-row {
-    border-bottom-color: #374151;
-  }
+.dark .toggle-row {
+  border-bottom-color: #374151;
+}
 
-  .toggle-row:hover {
-    background-color: #111827;
-  }
+.dark .toggle-row:hover {
+  background-color: #111827;
+}
 
-  .toggle-row span {
-    color: #d1d5db;
-  }
+.dark .toggle-row span {
+  color: #d1d5db;
 }
 
 /* Responsive Design */
