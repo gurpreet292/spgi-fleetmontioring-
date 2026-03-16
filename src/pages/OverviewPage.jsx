@@ -12,6 +12,7 @@ import PieChartComponent from '../components/charts/PieChartComponent';
 import GlobalFilters from '../Components/filters/GlobalFilters';
 import SearchInput from '../Components/filters/SearchInput';
 import DataRangePicker from '../Components/filters/DataRangePicker';
+import RecentActivity from '../components/common/RecentActivity';
 
 const OverviewPage = () => {
   // Access global filters state
@@ -101,6 +102,8 @@ const OverviewPage = () => {
             <PieChartComponent data={pieData} />
           </ChartContainer>
         </div>
+
+        <RecentActivity />
       </div>
     </div>
   );
