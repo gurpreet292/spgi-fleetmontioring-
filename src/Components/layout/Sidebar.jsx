@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   Trash2,
@@ -27,22 +27,22 @@ const Sidebar = ({ isOpen }) => {
 
   const renderNavItems = (items) =>
     items.map(({ title, url, icon: Icon }) => {
-      const isActive = pathname === url;
-
       return (
-        <Link
+        <NavLink
           key={title}
           to={url}
           title={!isOpen ? title : undefined}
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-            isActive
-              ? "bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400"
-              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-          }`}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+              isActive
+                ? "bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400"
+                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            }`
+          }
         >
           <Icon className="h-5 w-5 flex-shrink-0" />
           {isOpen && <span className="text-sm font-medium">{title}</span>}
-        </Link>
+        </NavLink>
       );
     });
 

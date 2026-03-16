@@ -18,3 +18,29 @@ export const mockData = [
   { id: 17, date: "2026-03-09", region: "Europe", co2Saved: 1250, treesPlanted: 115, category: "Ocean Cleanup", waterSaved: 5200, wasteRecycled: 720, pollutionReduced: 960, energyGenerated: 1050 },
   { id: 18, date: "2026-03-09", region: "North America", co2Saved: 2000, treesPlanted: 155, category: "Solar Energy", waterSaved: 6800, wasteRecycled: 440, pollutionReduced: 720, energyGenerated: 3300 },
 ];
+
+export const vehicles = [
+  { id: "TRK-001", location: "Chibramau Central", fuel: 82, efficiency: 95, status: "Active" },
+  { id: "TRK-002", location: "Thana Road", fuel: 96, efficiency: 78, status: "Active" },
+  { id: "TRK-003", location: "Village Area", fuel: 83, efficiency: 75, status: "Idle" },
+  { id: "TRK-004", location: "Industrial Area", fuel: 55, efficiency: 94, status: "Maintenance" },
+  { id: "TRK-005", location: "City Mall", fuel: 60, efficiency: 65, status: "Active" },
+  { id: "TRK-006", location: "Market Road", fuel: 30, efficiency: 50, status: "Maintenance" },
+];
+
+export const wasteCollection = [
+  { date: "13 Feb", waste: 4800, recycled: 2100 },
+  { date: "15 Feb", waste: 5300, recycled: 2200 },
+  { date: "17 Feb", waste: 4600, recycled: 1900 },
+  { date: "19 Feb", waste: 5100, recycled: 2500 },
+  { date: "21 Feb", waste: 3900, recycled: 2000 },
+  { date: "23 Feb", waste: 5400, recycled: 2400 },
+  { date: "25 Feb", waste: 4300, recycled: 2100 },
+  { date: "27 Feb", waste: 5300, recycled: 2400 },
+  { date: "1 Mar", waste: 4500, recycled: 2000 },
+  { date: "3 Mar", waste: 4700, recycled: 2300 },
+  { date: "5 Mar", waste: 5200, recycled: 2101 },
+  { date: "7 Mar", waste: 5300, recycled: 2400 },
+  { date: "9 Mar", waste: 4800, recycled: 2200 },
+  { date: "11 Mar", waste: 5500, recycled: 2700 },
+];

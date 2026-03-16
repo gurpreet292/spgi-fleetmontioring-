@@ -5,9 +5,11 @@ import { AlertCircle, RefreshCw, BarChart2 } from 'lucide-react';
 export const ChartContainer = ({ title, isLoading, error, isEmpty, onRetry, children }) => {
   return (
     <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-green-100 flex flex-col h-96 hover:shadow-xl transition-all duration-300">
-      <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center gap-2">{title}</h3>
-      <div className="flex-1 w-full h-full relative flex items-center justify-center bg-gradient-to-br from-green-50/50 to-emerald-50/50 rounded-xl">
-        
+      <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center gap-2">
+       {title}
+      </h3>
+    <div className="w-full h-[350px] relative flex items-center justify-center">
+      
         {isLoading && (
           <div className="text-green-600 animate-pulse text-center">
             <BarChart2 size={32} className="mx-auto mb-2 opacity-50" />

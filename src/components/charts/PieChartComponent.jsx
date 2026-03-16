@@ -1,20 +1,42 @@
-import React from 'react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import {
+PieChart,
+Pie,
+Cell,
+Legend,
+Tooltip,
+ResponsiveContainer
+} from "recharts";
 
-// A palette of earthy greens
-const COLORS =['#10b981', '#047857', '#34d399', '#065f46'];
+const data = [
+ { name: "Plastic", value: 25 },
+ { name: "Organic", value: 35 },
+ { name: "Metal", value: 15 },
+ { name: "Paper", value: 25 }
+];
 
-const PieChartComponent = React.memo(({ data }) => (
-  <ResponsiveContainer width="100%" height="100%">
-    <PieChart>
-      <Pie data={data} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
-        {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-      </Pie>
-      <Tooltip contentStyle={{borderRadius: '8px', border: 'none'}} />
-      <Legend verticalAlign="bottom" height={36} iconType="circle" />
-    </PieChart>
+const COLORS = ["#4F6DB8", "#16A34A", "#C89B2E", "#E4572E"];
+
+export default function PieChartComponent() {
+ return (
+  <ResponsiveContainer width="100%" height={300}>
+   <PieChart>
+    <Pie
+     data={data}
+     dataKey="value"
+     cx="50%"
+     cy="50%"
+     innerRadius={60}
+     outerRadius={90}
+     paddingAngle={3}
+    >
+     {data.map((entry, index) => (
+      <Cell key={index} fill={COLORS[index]} />
+     ))}
+    </Pie>
+
+    <Tooltip />
+    <Legend verticalAlign="bottom"/>
+   </PieChart>
   </ResponsiveContainer>
-));
-
-PieChartComponent.displayName = 'PieChartComponent';
-export default PieChartComponent;
+ );
+}

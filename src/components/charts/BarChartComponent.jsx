@@ -1,25 +1,29 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip,Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
+import {
+BarChart,
+Bar,
+XAxis,
+YAxis,
+CartesianGrid,
+Tooltip,
+ResponsiveContainer
+} from "recharts";
 
-const BarChartComponent = React.memo(({ data }) => (
-  <ResponsiveContainer width="100%" height="100%">
-    <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-      <XAxis dataKey="name" tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
-      <YAxis tick={{fill: '#6b7280', fontSize: 12}} axisLine={false} tickLine={false} />
-      <Tooltip cursor={{fill: '#f3f4f6'}} contentStyle={{borderRadius: '8px', border: 'none'}} />
-      <Legend
-  iconType="circle"
-  wrapperStyle={{
-    fontSize: '14px',
-    paddingTop: '10px'
-  }}
-/>
-      {/* Changed to Emerald Green */}
-      <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]} barSize={40} /> 
-    </BarChart>
+const data = [
+ { name: "North America", value: 14000 },
+ { name: "Europe", value: 7000 },
+ { name: "Asia", value: 3000 }
+];
+
+export default function BarChartComponent() {
+ return (
+  <ResponsiveContainer width="100%" height={300}>
+   <BarChart data={data}>
+    <CartesianGrid strokeDasharray="3 3"/>
+    <XAxis dataKey="name"/>
+    <YAxis/>
+    <Tooltip/>
+    <Bar dataKey="value" fill="#16a34a" radius={[6,6,0,0]}/>
+   </BarChart>
   </ResponsiveContainer>
-));
-
-BarChartComponent.displayName = 'BarChartComponent';
-export default BarChartComponent;
+ );
+}
