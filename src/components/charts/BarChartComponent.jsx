@@ -14,13 +14,13 @@ const data = [
  { name: "Asia", value: 3000 }
 ];
 
-export default function BarChartComponent() {
+export default function BarChartComponent({ data: chartData = data }) {
  return (
   <ResponsiveContainer width="100%" height={300}>
-   <BarChart data={data}>
-    <CartesianGrid strokeDasharray="3 3"/>
-    <XAxis dataKey="name"/>
-    <YAxis/>
+    <BarChart data={chartData}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.4}/>
+        <XAxis dataKey="name" stroke="#94a3b8" tick={{ fill: "#94a3b8", fontSize: 12 }}/>
+        <YAxis stroke="#94a3b8" tick={{ fill: "#94a3b8", fontSize: 12 }}/>
     <Tooltip/>
     <Bar dataKey="value" fill="#16a34a" radius={[6,6,0,0]}/>
    </BarChart>
