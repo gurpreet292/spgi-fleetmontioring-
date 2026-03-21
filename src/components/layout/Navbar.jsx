@@ -1,44 +1,40 @@
-import { Menu, Search, Bell } from "lucide-react";
+import { Menu, Search, Bell, X } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
-import { useState } from "react";
-import logo from "../../assets/images/logo.webp";
-export default function Navbar() {
-    
+import logo from "../../assets/spgi-logo.png";
+
+export default function Navbar({ sidebarOpen, setSidebarOpen }) {
   const { user } = useAuth();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-
-    <header className="flex justify-between items-center px-6 py-4 bg-white shadow">
-
+    <header className="flex justify-between items-center px-4 md:px-6 py-4 bg-white/90 backdrop-blur-md border-b border-emerald-100 shadow sticky top-0 z-20">
       <div className="flex items-center gap-3">
-
         <button
-          className="md:hidden"
+          className="md:hidden p-2 hover:bg-emerald-50 text-emerald-800 rounded-lg transition-colors"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
-          <Menu size={22} />
+          {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="logo" className="w-8 h-8" />
-          <h1 className="text-green-700 font-semibold text-lg">
-          {user?.role} Panel
+        <div className="flex items-center gap-2 md:gap-3">
+          <img src={logo} alt="logo" className="w-7 h-7 md:w-8 md:h-8 object-contain" />
+          <h1 className="text-emerald-800 font-semibold text-sm md:text-lg truncate">
+            {user?.role} Panel
           </h1>
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
+        <button className="p-2 hover:bg-emerald-50 text-emerald-700 rounded-lg transition-colors hidden sm:block">
+          <Search size={20} />
+        </button>
+        <button className="p-2 hover:bg-emerald-50 text-emerald-700 rounded-lg transition-colors">
+          <Bell size={20} />
+        </button>
 
-        <Search size={20} />
-        <Bell size={20} />
-
-        <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-semibold">
+        <div className="w-9 h-9 md:w-10 md:h-10 bg-emerald-700 text-white rounded-full flex items-center justify-center font-semibold text-sm md:text-base shadow-md shadow-emerald-200">
           {user?.name?.charAt(0)}
         </div>
-
       </div>
-
     </header>
   );
 }

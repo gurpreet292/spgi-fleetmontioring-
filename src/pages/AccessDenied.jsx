@@ -1,7 +1,7 @@
 export default function AccessDenied() {
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen page-open-animate">
 
       <div className="text-center">
 

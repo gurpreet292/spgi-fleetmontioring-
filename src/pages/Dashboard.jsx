@@ -5,10 +5,8 @@ export default function Dashboard() {
   const { user } = useAuth();
 
   return (
-
-    <div className="p-6">
-
-      <h1 className="text-2xl font-bold mb-6">
+    <div>
+      <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
         Dashboard
       </h1>
 
@@ -16,29 +14,21 @@ export default function Dashboard() {
 
       {user?.role === "Admin" && (
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-          <div className="bg-white shadow rounded-xl p-6">
-            Total Revenue
-            <div className="text-2xl font-bold">
-              $45,231
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+          <div className="bg-white shadow rounded-xl p-4 md:p-6">
+            <div className="text-gray-600 text-xs md:text-sm font-medium mb-2">Total Revenue</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">$45,231</div>
           </div>
 
-          <div className="bg-white shadow rounded-xl p-6">
-            Active Users
-            <div className="text-2xl font-bold">
-              2,845
-            </div>
+          <div className="bg-white shadow rounded-xl p-4 md:p-6">
+            <div className="text-gray-600 text-xs md:text-sm font-medium mb-2">Active Users</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">2,845</div>
           </div>
 
-          <div className="bg-white shadow rounded-xl p-6">
-            Waste Processed
-            <div className="text-2xl font-bold">
-              12.8 Tons
-            </div>
+          <div className="bg-white shadow rounded-xl p-4 md:p-6">
+            <div className="text-gray-600 text-xs md:text-sm font-medium mb-2">Waste Processed</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">12.8 Tons</div>
           </div>
-
         </div>
 
       )}
@@ -47,22 +37,16 @@ export default function Dashboard() {
 
       {user?.role === "Manager" && (
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          <div className="bg-white shadow rounded-xl p-6">
-            Waste Collection Today
-            <div className="text-2xl font-bold">
-              3.2 Tons
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6">
+          <div className="bg-white shadow rounded-xl p-4 md:p-6">
+            <div className="text-gray-600 text-xs md:text-sm font-medium mb-2">Waste Collection Today</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">3.2 Tons</div>
           </div>
 
-          <div className="bg-white shadow rounded-xl p-6">
-            Active Field Teams
-            <div className="text-2xl font-bold">
-              8
-            </div>
+          <div className="bg-white shadow rounded-xl p-4 md:p-6">
+            <div className="text-gray-600 text-xs md:text-sm font-medium mb-2">Active Field Teams</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">8</div>
           </div>
-
         </div>
 
       )}
@@ -71,22 +55,16 @@ export default function Dashboard() {
 
       {user?.role === "Analyst" && (
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          <div className="bg-white shadow rounded-xl p-6">
-            Recycling Rate
-            <div className="text-2xl font-bold">
-              68%
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6">
+          <div className="bg-white shadow rounded-xl p-4 md:p-6">
+            <div className="text-gray-600 text-xs md:text-sm font-medium mb-2">Recycling Rate</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">68%</div>
           </div>
 
-          <div className="bg-white shadow rounded-xl p-6">
-            Carbon Saved
-            <div className="text-2xl font-bold">
-              4.5 Tons
-            </div>
+          <div className="bg-white shadow rounded-xl p-4 md:p-6">
+            <div className="text-gray-600 text-xs md:text-sm font-medium mb-2">Carbon Saved</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">4.5 Tons</div>
           </div>
-
         </div>
 
       )}
