@@ -1,14 +1,14 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainLayout from '../Components/layout/MainLayout';
-import Loader from '../Components/common/Loader';
+import MainLayout from '../components/layout/MainLayout';
+import Loader from '../components/common/Loader';
 
 const OverviewPage = lazy(() => import('../pages/OverviewPage'));
 const Reports = lazy(() => import('../pages/Reports'));
 const Settings = lazy(() => import('../pages/setting'));
 const RecyclingMetricsPage = lazy(() => import('../pages/RecyclingMetricsPage'));
-const FleetMonitoring = lazy(() => import('../components/pages/FleetMonitoring'));
-const WasteAnalytics = lazy(() => import('../components/pages/WasteAnalytics'));
+const FleetMonitoring = lazy(() => import('../pages/FleetMonitoring'));
+const WasteAnalytics = lazy(() => import('../pages/WasteAnalytics'));
 
 const AppRouter = () => {
   return (

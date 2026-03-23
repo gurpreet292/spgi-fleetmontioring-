@@ -6,7 +6,7 @@ import {
   Download,
   Search
 } from "lucide-react";
-import ActionCard from "../Components/common/ActionCard";
+import ActionCard from "../components/common/ActionCard";
 import { downloadReport } from "../services/reportService";
 
 const reports = [

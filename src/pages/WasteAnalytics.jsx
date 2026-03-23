@@ -1,7 +1,7 @@
 import React from 'react';
-import { ChartContainer } from '../charts/ChartContainer';
-import WasteCollectionChart from '../charts/WasteCollectionChart';
-import PieChartComponent from '../charts/PieChartComponent';
+import { ChartContainer } from '../components/charts/ChartContainer';
+import WasteCollectionChart from '../components/charts/WasteCollectionChart';
+import PieChartComponent from '../components/charts/PieChartComponent';
 
 const wasteTrendData = [
   { date: '13 Feb', waste: 4800, recycled: 2100 },
