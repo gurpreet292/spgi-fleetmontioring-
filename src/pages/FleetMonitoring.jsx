@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { vehicles as mockVehicles } from "../../services/mockData";
+import { vehicles as mockVehicles } from "../services/mockData";
 
 const FleetMonitoring = () => {
   const [filter, setFilter] = useState("All");

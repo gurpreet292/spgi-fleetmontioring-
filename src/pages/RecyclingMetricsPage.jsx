@@ -13,7 +13,7 @@ import { ChartContainer } from "../components/charts/ChartContainer";
 import PieChartComponent from "../components/charts/PieChartComponent";
 import WasteCollectionChart from "../components/charts/WasteCollectionChart";
 
-import DataRangePicker from "../Components/filters/DataRangePicker";
+import DataRangePicker from "../components/filters/DataRangePicker";
 
 const RecyclingMetricsPage = () => {
   const { filters } = useContext(FilterContext);

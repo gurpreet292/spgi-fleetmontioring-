@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Bell, User, Moon, Sun, ChevronDown,
   Pencil, Wallet, Crown, Headphones } from "lucide-react";
-import { useTheme } from "../../components/context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 
 const Header = ({ toggleSidebar }) => {
 

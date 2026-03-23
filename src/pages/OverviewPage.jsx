@@ -9,9 +9,9 @@ import { ChartContainer } from '../components/charts/ChartContainer';
 import BarChartComponent from '../components/charts/BarChartComponent';
 import LineChartComponent from '../components/charts/LineChartComponent';
 import PieChartComponent from '../components/charts/PieChartComponent';
-import GlobalFilters from '../Components/filters/GlobalFilters';
-import SearchInput from '../Components/filters/SearchInput';
-import DataRangePicker from '../Components/filters/DataRangePicker';
+import GlobalFilters from '../components/filters/GlobalFilters';
+import SearchInput from '../components/filters/SearchInput';
+import DataRangePicker from '../components/filters/DataRangePicker';
 import RecentActivity from '../components/common/RecentActivity';
 
 const OverviewPage = () => {
