@@ -10,40 +10,40 @@ const FleetMonitoring = () => {
   }, [filter]);
 
   return (
-    <div className="p-6 space-y-6 max-w-7xl mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
       <div>
         <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Fleet Monitoring</h1>
         <p className="text-sm text-gray-500 dark:text-gray-300">Real-time tracking of vehicle operations</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-        <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="p-3 sm:p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
           <p className="text-xs text-gray-500 dark:text-gray-300">Total Fleet</p>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">20 trucks</h2>
         </div>
-        <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 rounded-lg">
+        <div className="p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 rounded-lg">
           <p className="text-xs text-gray-500 dark:text-gray-300">Active Trucks</p>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">15</h2>
         </div>
-        <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+        <div className="p-3 sm:p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
           <p className="text-xs text-gray-500 dark:text-gray-300">Idle Trucks</p>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">3</h2>
         </div>
-        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 rounded-lg">
+        <div className="p-3 sm:p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 rounded-lg">
           <p className="text-xs text-gray-500 dark:text-gray-300">In Maintenance</p>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">2</h2>
         </div>
-        <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+        <div className="p-3 sm:p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
           <p className="text-xs text-gray-500 dark:text-gray-300">Avg Efficiency</p>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">85%</h2>
         </div>
-        <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+        <div className="p-3 sm:p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
           <p className="text-xs text-gray-500 dark:text-gray-300">Avg Fuel Level</p>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">65%</h2>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
           <h3 className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100">Fleet Utilization</h3>
           <div className="space-y-3 text-xs">

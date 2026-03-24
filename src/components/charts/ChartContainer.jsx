@@ -8,7 +8,7 @@ export const ChartContainer = ({ title, isLoading, error, isEmpty, onRetry, chil
       <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2">
        {title}
       </h3>
-    <div className="w-full h-[350px] relative flex items-center justify-center">
+    <div className="w-full h-[250px] sm:h-[300px] md:h-[350px] relative flex items-center justify-center">
       
         {isLoading && (
           <div className="text-green-600 dark:text-green-400 animate-pulse text-center">

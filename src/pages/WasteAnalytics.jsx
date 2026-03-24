@@ -29,8 +29,8 @@ const materialsData = [
 
 const WasteAnalytics = () => {
   return (
-    <div className="max-w-7xl mx-auto p-6 lg:p-8 space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">Waste Management Analytics</h1>
+    <div className="max-w-7xl mx-auto p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6">
+      <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-100">Waste Management Analytics</h1>
       <p className="text-sm text-gray-600 dark:text-gray-300">
         Simple overview of waste collection and recycling performance.
       </p>

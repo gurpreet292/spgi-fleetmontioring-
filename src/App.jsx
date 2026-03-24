@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { FilterProvider } from './context/FilterContext';
 import AppRouter from './routes/AppRouter';
 import ErrorBoundaryFallback from './components/common/ErrorBoundaryFallback';
-import { ThemeProvider } from "./components/context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import './index.css';
 import './App.css';
 

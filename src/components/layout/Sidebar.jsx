@@ -22,7 +22,7 @@ const secondaryNavItems = [
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, isMobileOpen, closeMobile }) => {
   const { pathname } = useLocation();
 
   const renderNavItems = (items) =>
@@ -31,7 +31,7 @@ const Sidebar = ({ isOpen }) => {
         <NavLink
           key={title}
           to={url}
-          title={!isOpen ? title : undefined}
+          onClick={closeMobile}
           className={({ isActive }) =>
             `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
               isActive
@@ -48,9 +48,16 @@ const Sidebar = ({ isOpen }) => {
 
   return (
     <aside
-      className={`${
-        isOpen ? "w-64" : "w-20"
-      } bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 flex flex-col`}
+      className={`
+        fixed md:static top-0 left-0 z-50 h-screen md:h-full
+        ${isOpen ? "w-64" : "w-20"}
+        bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700
+        transition-all duration-300 ease-in-out flex flex-col
+        
+        ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} 
+        md:translate-x-0 md:relative
+        shadow-lg md:shadow-none
+      `}
     >
       {/* Header */}
       <div className="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
@@ -74,7 +81,6 @@ const Sidebar = ({ isOpen }) => {
 
       {/* Navigation */}
       <div className="flex-1 overflow-y-auto py-4">
-
         <div className="px-3 mb-4">
           {isOpen && (
             <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase mb-2">
@@ -92,7 +98,6 @@ const Sidebar = ({ isOpen }) => {
           )}
           <nav className="space-y-1">{renderNavItems(secondaryNavItems)}</nav>
         </div>
-
       </div>
 
       {/* Footer */}
