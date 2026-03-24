@@ -3,7 +3,6 @@ import { MdLock } from "react-icons/md";
 import { FiArrowRight } from "react-icons/fi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
 
 const roles = [
   "Admin",
@@ -13,7 +12,6 @@ const roles = [
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
       name: "",
@@ -112,18 +110,18 @@ export default function LoginForm() {
   
   
   return (
-    <div className="flex w-full items-start justify-center bg-gray-100 px-3 pb-6 pt-3 md:px-4 md:pt-4 lg:h-svh lg:w-1/2 lg:items-center lg:px-6 lg:py-6">
-      <div className="w-full max-w-md rounded-[28px] bg-white px-4 py-5 shadow-xl md:px-6 md:py-7 lg:max-h-[calc(100svh-3rem)] lg:px-7 lg:py-6">
+    <div className="w-full lg:w-1/2 flex items-start justify-center bg-gray-100 lg:min-h-screen px-3 md:px-4 lg:py-12 -mt-8 lg:mt-0">
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-md px-4 md:px-7 py-6 md:py-9">
 
         {/* Card Header */}
-        <div className="mb-5 text-center md:mb-6">
+        <div className="mb-6 md:mb-7 text-center">
           <h2 className="text-xl md:text-2xl font-extrabold text-gray-800">Welcome Back</h2>
           <p className="text-green-600 text-xs md:text-sm mt-1 font-medium">
             Please enter your details to sign in
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 md:gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-5">
 
           {/* Full Name */}
 <div className="flex flex-col gap-1">
@@ -131,7 +129,7 @@ export default function LoginForm() {
     Full Name
   </label>
 
-  <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2.5 bg-white transition-all focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 md:gap-3 md:rounded-xl md:px-4 md:py-3">
+  <div className="flex items-center gap-2 md:gap-3 border border-gray-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2.5 md:py-3 bg-white focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all">
     <FaUser className="text-gray-400 text-sm md:text-base shrink-0" />
 
     <input
@@ -157,7 +155,7 @@ export default function LoginForm() {
     Email Address
   </label>
 
-  <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2.5 bg-white transition-all focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 md:gap-3 md:rounded-xl md:px-4 md:py-3">
+  <div className="flex items-center gap-2 md:gap-3 border border-gray-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2.5 md:py-3 bg-white focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all">
     <FaUser className="text-gray-400 text-sm md:text-base shrink-0" />
 
     <input
@@ -180,7 +178,7 @@ export default function LoginForm() {
           {/* Select Role */}
           <div className="flex flex-col gap-1">
             <label className="text-xs md:text-sm font-bold text-gray-800">Select Role</label>
-            <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2.5 bg-white transition-all focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 md:gap-3 md:rounded-xl md:px-4 md:py-3">
+            <div className="flex items-center gap-2 md:gap-3 border border-gray-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2.5 md:py-3 bg-white focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all">
               <FaBriefcase className="text-gray-400 text-sm md:text-base shrink-0" />
               <select
                 name="role"
@@ -214,7 +212,7 @@ export default function LoginForm() {
           {/* Password */}
           <div className="flex flex-col gap-1">
             <label className="text-xs md:text-sm font-bold text-gray-800">Password</label>
-            <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2.5 bg-white transition-all focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 md:gap-3 md:rounded-xl md:px-4 md:py-3">
+            <div className="flex items-center gap-2 md:gap-3 border border-gray-200 rounded-lg md:rounded-xl px-3 md:px-4 py-2.5 md:py-3 bg-white focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all">
               <MdLock className="text-gray-400 text-sm md:text-base shrink-0" />
               <input
                 type={showPassword ? "text" : "password"}
@@ -237,7 +235,7 @@ export default function LoginForm() {
               <p className="text-red-500 text-xs mt-1">{errors.password}</p>
             )}
             {/* Forgot Password */}
-            <div className="mt-1 flex justify-end">
+            <div className="flex justify-end mt-1">
               <button
                 type="button"
                 onClick={handleForgotPassword}
@@ -251,7 +249,7 @@ export default function LoginForm() {
           {/* Sign In Button */}
           <button
             type="submit"
-            className="mt-1 flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 py-2.5 text-sm font-bold text-white shadow-md shadow-green-200 transition-colors hover:bg-green-700 active:bg-green-800 md:rounded-xl md:py-3 md:text-base"
+            className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-bold py-2.5 md:py-3.5 text-sm md:text-base rounded-lg md:rounded-xl transition-colors shadow-md shadow-green-200 mt-2 md:mt-1"
           >
             Sign In
             <FiArrowRight className="text-base md:text-lg" />
@@ -259,7 +257,7 @@ export default function LoginForm() {
         </form>
 
         {/* Footer */}
-        <p className="mt-4 text-center text-xs text-gray-500 md:mt-5 md:text-sm">
+        <p className="text-center text-xs md:text-sm text-gray-500 mt-4 md:mt-6">
           Don&apos;t have an account?{" "}
           <a
             href="#"
