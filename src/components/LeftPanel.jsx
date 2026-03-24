@@ -1,6 +1,6 @@
 import { FaRecycle, FaLeaf } from "react-icons/fa";
 import { FiTrendingDown } from "react-icons/fi";
-import logo from "../assets/images/logo.webp";
+import logo from "../assets/spgi-logo.png";
 
 const features = [
   {
@@ -23,8 +23,8 @@ const features = [
 export default function LeftPanel() {
   return (
     <div
-      className="relative overflow-hidden w-full lg:w-1/2 lg:min-h-screen flex flex-col"
-      style={{ background: "linear-gradient(135deg, #15803d 0%, #16a34a 50%, #10b981 100%)" }}
+      className="relative overflow-hidden w-full lg:w-1/2 lg:min-h-screen flex flex-col eco-animate-bg"
+      style={{ background: "linear-gradient(140deg, #14532d 0%, #166534 46%, #0f766e 100%)" }}
     >
       {/* Decorative circles */}
       <div
@@ -42,10 +42,7 @@ export default function LeftPanel() {
 
       {/* ── MOBILE BANNER (hidden on lg+) ── */}
       <div className="relative z-10 flex flex-col items-center pt-10 pb-14 px-6 lg:hidden">
-        {/* Logo box */}
-        <div className="bg-white rounded-2xl p-3 shadow-lg mb-4">
-          <img src={logo} alt="SPGI Logo" className="w-16 h-16 object-contain" />
-        </div>
+        <img src={logo} alt="SPGI Logo" className="w-24 h-24 object-contain mb-4" />
         <h2 className="text-3xl font-extrabold text-white tracking-wide">SPGI</h2>
         <p
           className="text-xs font-bold tracking-widest uppercase mt-2 text-center"
@@ -62,7 +59,7 @@ export default function LeftPanel() {
           <img
             src={logo}
             alt="SPGI Logo"
-            className="w-24 h-24 object-contain"
+            className="w-32 h-32 object-contain"
           />
           <span
             className="text-lg font-semibold tracking-widest uppercase"
