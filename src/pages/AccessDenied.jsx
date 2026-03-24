@@ -5,13 +5,9 @@ export default function AccessDenied() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-red-50 to-red-100">
-      <div className="text-center max-w-md mx-auto px-4">
-        <div className="mb-6 flex justify-center">
-          <div className="bg-red-100 p-4 rounded-full">
-            <AlertCircle className="text-red-600" size={48} />
-          </div>
-        </div>
+    <div className="flex items-center justify-center h-screen page-open-animate">
+
+      <div className="text-center">
 
         <h1 className="text-4xl font-bold text-red-600 mb-2">403</h1>
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Access Denied</h2>

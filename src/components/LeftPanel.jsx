@@ -1,6 +1,6 @@
 import { FaRecycle, FaLeaf } from "react-icons/fa";
 import { FiTrendingDown } from "react-icons/fi";
-import logo from "../assets/images/logo.webp";
+import logo from "../assets/spgi-logo.png";
 
 const features = [
   {
@@ -62,7 +62,7 @@ export default function LeftPanel() {
           <img
             src={logo}
             alt="SPGI Logo"
-            className="w-24 h-24 object-contain"
+            className="w-32 h-32 object-contain"
           />
           <span
             className="text-lg font-semibold tracking-widest uppercase"

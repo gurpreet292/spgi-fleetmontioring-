@@ -1,39 +1,42 @@
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  const location = useLocation();
 
   return (
-    <div className="flex flex-col-reverse md:flex-row h-screen">
-      {/* Mobile Overlay */}
+    <div className="flex">
+      {/* Desktop Sidebar */}
+      <div className="hidden md:block">
+        <Sidebar onClose={() => setSidebarOpen(false)} />
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-20"
+        <div 
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
-      <div
-        className={`fixed md:relative left-0 top-0 h-screen z-30 transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
-      >
-        <Sidebar onClose={() => setSidebarOpen(false)} />
+      {/* Mobile Sidebar */}
+      <div className="fixed inset-y-0 left-0 z-40 md:hidden">
+        {sidebarOpen && <Sidebar onClose={() => setSidebarOpen(false)} />}
       </div>
 
-      {/* Main Content */}
-      <div className="flex flex-col flex-1 w-full md:w-auto">
-        <Navbar onSidebarToggle={handleSidebarToggle} sidebarOpen={sidebarOpen} />
+      <div className="flex-1">
+        <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-        <main className="flex-1 p-4 md:p-6 bg-gray-100 overflow-y-auto">
+        <main
+          key={location.pathname}
+          className="p-4 md:p-6 min-h-screen page-open-animate eco-animate-bg"
+          style={{
+            background: "linear-gradient(160deg, #f0fdf4 0%, #dcfce7 42%, #d1fae5 100%)",
+          }}
+        >
           <Outlet />
         </main>
       </div>
