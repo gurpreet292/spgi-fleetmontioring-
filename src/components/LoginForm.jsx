@@ -3,7 +3,6 @@ import { MdLock } from "react-icons/md";
 import { FiArrowRight } from "react-icons/fi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
 
 const roles = [
   "Admin",
@@ -13,7 +12,6 @@ const roles = [
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
       name: "",
@@ -64,21 +62,16 @@ export default function LoginForm() {
 
   if (!valid) return;
 
-  const userData = {
-    name: form.name,
-    email: form.email,
-    role: form.role,
-  };
-
-  login(userData);
+  // Store role in localStorage
+  localStorage.setItem("role", form.role);
+  localStorage.setItem("name", form.name);
+  localStorage.setItem("email", form.email);
 
   const routes = {
     Admin: "/dashboard",
     Analyst: "/analytics",
     "Manager": "/operations"
   };
-
- 
 
   navigate(routes[form.role] || "/dashboard");
 };
