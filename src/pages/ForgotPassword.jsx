@@ -1,67 +1,16 @@
 import { useState } from "react";
-import { FaCheck, FaArrowLeft, FaLock, FaShieldAlt } from "react-icons/fa";
+import { FaCheck, FaArrowLeft, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/spgi-logo.png";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState(null); // null, 'change', 'reset'
-  const [modePulseKey, setModePulseKey] = useState(0);
   const [email, setEmail] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState("");
-
-  const handleModeSelect = (nextMode) => {
-    setMode(nextMode);
-    setError("");
-    setModePulseKey((prev) => prev + 1);
-  };
-
-  // Change Password Handler
-  const handleChangeSubmit = (e) => {
-    e.preventDefault();
-    setError("");
-
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const currentUser = users[0];
-
-    if (!currentUser) {
-      setError("No user found. Please login first.");
-      navigate("/login");
-      return;
-    }
-
-    if (currentUser.password !== currentPassword) {
-      setError("Current password is incorrect");
-      return;
-    }
-
-    if (newPassword.length < 6) {
-      setError("New password must be at least 6 characters");
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    const updatedUsers = users.map((user) =>
-      user.email === currentUser.email
-        ? { ...user, password: newPassword }
-        : user
-    );
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-    setShowSuccess(true);
-    setTimeout(() => {
-      navigate("/login");
-    }, 3000);
-  };
 
   // Reset Password Handler
   const handleResetSubmit = (e) => {
@@ -176,146 +125,13 @@ export default function ForgotPassword() {
 
         {/* Content */}
         <div className="p-4 md:p-8 relative overflow-hidden">
-
-          {mode !== null && (
-            <div
-              key={`mode-circle-${mode}-${modePulseKey}`}
-              className="absolute top-1/2 left-1/2 w-[240px] h-[240px] md:w-[300px] md:h-[300px] rounded-full border border-emerald-300/70 pointer-events-none"
-              style={{
-                animation: "circlePulseOnce 0.95s ease-out 1",
-              }}
-            />
-          )}
-
-          {mode === null ? (
-            <>
-              <div className="flex justify-center mb-6">
-                <div className="bg-emerald-100 p-4 rounded-full">
-                  <FaShieldAlt className="text-3xl text-emerald-600" />
-                </div>
-              </div>
-              <h1 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-2">Account Security</h1>
-              <p className="text-center text-xs md:text-sm text-slate-600 mb-8">
-                Choose how you would like to update your password
-              </p>
-
-              <div className="space-y-4">
-                <button
-                  onClick={() => handleModeSelect("change")}
-                  className="w-full bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-600 text-slate-800 font-semibold py-4 rounded-lg transition-all text-left pl-5"
-                >
-                  <div className="font-bold text-emerald-700">Change Password (if you remember it)</div>
-                </button>
-
-                <button
-                  onClick={() => handleModeSelect("reset")}
-                  className="w-full bg-red-50 hover:bg-red-100 border-2 border-red-600 text-slate-800 font-semibold py-4 rounded-lg transition-all text-left pl-5"
-                >
-                  <div className="font-bold text-red-700">Reset Password (if you forgot it)</div>
-                </button>
-
-                <button
-                  onClick={() => navigate("/login")}
-                  className="w-full flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800 transition-all pt-4"
-                >
-                  <FaArrowLeft className="text-sm" />
-                  Back to Login
-                </button>
-              </div>
-            </>
-          ) : mode === "change" ? (
-            <>
+          <>
               <div className="flex justify-center mb-6">
                 <div className="bg-emerald-100 p-4 rounded-full">
                   <FaLock className="text-3xl text-emerald-600" />
                 </div>
               </div>
-              <h1 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-2">Change Password</h1>
-              <p className="text-center text-xs md:text-sm text-slate-600 mb-8">
-                Keep your account secure with a strong password
-              </p>
-
-              <form onSubmit={handleChangeSubmit} className="space-y-4 md:space-y-5">
-                <div>
-                  <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-2">Current Password</label>
-                  <div className="relative">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      value={currentPassword}
-                      onChange={(e) => setCurrentPassword(e.target.value)}
-                      placeholder="Enter current password"
-                      className="w-full bg-white/70 border border-slate-300 rounded-lg px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-2 focus:ring-green-200 focus:border-green-500 transition-all"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 md:right-4 top-2 md:top-3 text-slate-500 hover:text-slate-700 text-xs font-medium"
-                    >
-                      {showPassword ? "Hide" : "Show"}
-                    </button>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-2">New Password</label>
-                  <div className="relative">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                      placeholder="Enter new password"
-                      className="w-full bg-white/70 border border-slate-300 rounded-lg px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-2 focus:ring-green-200 focus:border-green-500 transition-all"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-2">Confirm Password</label>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Confirm password"
-                    className="w-full bg-white/70 border border-slate-300 rounded-lg px-3 md:px-4 py-2 md:py-3 text-xs md:text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-2 focus:ring-green-200 focus:border-green-500 transition-all"
-                    required
-                  />
-                </div>
-
-                {error && <p className="text-red-600 text-xs md:text-sm">{error}</p>}
-
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-2 md:py-3 text-sm md:text-base rounded-lg transition-all shadow-md hover:shadow-lg"
-                >
-                  Update Password
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMode(null);
-                    setCurrentPassword("");
-                    setNewPassword("");
-                    setConfirmPassword("");
-                    setError("");
-                  }}
-                  className="w-full flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800 transition-all py-2 md:py-3 text-sm md:text-base"
-                >
-                  <FaArrowLeft className="text-sm" />
-                  Back
-                </button>
-              </form>
-            </>
-          ) : (
-            <>
-              <div className="flex justify-center mb-6">
-                <div className="bg-red-100 p-4 rounded-full">
-                  <FaLock className="text-3xl text-red-600" />
-                </div>
-              </div>
-              <h1 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-2">Reset Password</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-2">Forgot Password</h1>
               <p className="text-center text-xs md:text-sm text-slate-600 mb-8">
                 Verify your email to reset your password
               </p>
@@ -370,7 +186,7 @@ export default function ForgotPassword() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-2 md:py-3 text-sm md:text-base rounded-lg transition-all shadow-md hover:shadow-lg"
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-2 md:py-3 text-sm md:text-base rounded-lg transition-all shadow-md hover:shadow-lg"
                 >
                   Reset Password
                 </button>
@@ -378,20 +194,19 @@ export default function ForgotPassword() {
                 <button
                   type="button"
                   onClick={() => {
-                    setMode(null);
                     setEmail("");
                     setNewPassword("");
                     setConfirmPassword("");
                     setError("");
+                    navigate("/login");
                   }}
                   className="w-full flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800 transition-all py-2 md:py-3 text-sm md:text-base"
                 >
                   <FaArrowLeft className="text-sm" />
-                  Back
+                  Back to Login
                 </button>
               </form>
             </>
-          )}
         </div>
 
         {/* Company Footer */}

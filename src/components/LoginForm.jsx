@@ -243,7 +243,7 @@ export default function LoginForm() {
                 onClick={handleForgotPassword}
                 className="text-xs md:text-sm text-green-600 font-semibold hover:text-green-700 hover:underline transition-colors"
               >
-                Account Security
+                Forgot Password
               </button>
             </div>
           </div>
