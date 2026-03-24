@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
 import { usePermissions } from "../../hooks/usePermissions";
+import { X } from "lucide-react";
 
 export default function Sidebar({ onClose }) {
 
-  const { user } = useAuth();
-
-  const items = usePermissions(user?.role);
+  const handleNavClick = () => {
+    if (window.innerWidth < 768) {
+      onClose && onClose();
+    }
+  };
 
   return (
     <aside

@@ -1,8 +1,5 @@
-import { useAuth } from "../hooks/useAuth";
-
 export default function Dashboard() {
-
-  const { user } = useAuth();
+  const role = localStorage.getItem("role");
 
   return (
     <div>
