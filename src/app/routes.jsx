@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "../components/layout/Layout";
-import { useAuth } from "../hooks/useAuth";
 
 import Dashboard from "../pages/Dashboard";
 import Operations from "../pages/Operations";
@@ -13,15 +12,15 @@ import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 function HomeRedirect() {
 
-  const { user } = useAuth();
+  const role = localStorage.getItem("role");
 
-  if (!user) return <Navigate to="/login" replace />;
+  if (!role) return <Navigate to="/login" replace />;
 
-  if (user.role === "Admin") return <Navigate to="/dashboard" replace />;
+  if (role === "Admin") return <Navigate to="/dashboard" replace />;
 
-  if (user.role === "Manager") return <Navigate to="/operations" replace />;
+  if (role === "Manager") return <Navigate to="/operations" replace />;
 
-  if (user.role === "Analyst") return <Navigate to="/analytics" replace />;
+  if (role === "Analyst") return <Navigate to="/analytics" replace />;
 
   return <Navigate to="/access-denied" replace />;
 }
