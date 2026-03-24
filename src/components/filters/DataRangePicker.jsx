@@ -35,6 +35,7 @@ export default function DataRangePicker({ withGranularity = false, className = "
   const { filters = {}, setFilters } = useContext(FilterContext) || {};
   const containerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [popupStyle, setPopupStyle] = useState({});
 
   const normalizedRange = useMemo(
     () => normalizeDateRange(filters?.dateRange),
@@ -70,6 +71,45 @@ export default function DataRangePicker({ withGranularity = false, className = "
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
+  useEffect(() => {
+    if (!isOpen || !containerRef.current) return;
+
+    const updatePopupPosition = () => {
+      const rect = containerRef.current.getBoundingClientRect();
+      const viewportPadding = 12;
+      const maxAllowedWidth = Math.max(280, window.innerWidth - viewportPadding * 2);
+      const desiredWidth = Math.min(380, maxAllowedWidth);
+
+      let left = rect.left;
+      if (left + desiredWidth > window.innerWidth - viewportPadding) {
+        left = window.innerWidth - viewportPadding - desiredWidth;
+      }
+      if (left < viewportPadding) {
+        left = viewportPadding;
+      }
+
+      const top = rect.bottom + 8;
+      const maxHeight = Math.max(280, window.innerHeight - top - viewportPadding);
+
+      setPopupStyle({
+        position: "fixed",
+        top: `${top}px`,
+        left: `${left}px`,
+        width: `${desiredWidth}px`,
+        maxHeight: `${maxHeight}px`
+      });
+    };
+
+    updatePopupPosition();
+    window.addEventListener("resize", updatePopupPosition);
+    window.addEventListener("scroll", updatePopupPosition, true);
+
+    return () => {
+      window.removeEventListener("resize", updatePopupPosition);
+      window.removeEventListener("scroll", updatePopupPosition, true);
+    };
+  }, [isOpen]);
+
   const selectedRange = state[0];
   const rangeLabel = `${format(selectedRange.startDate, "dd MMM yyyy")} - ${format(
     selectedRange.endDate,
@@ -100,7 +140,7 @@ export default function DataRangePicker({ withGranularity = false, className = "
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="inline-flex items-center gap-2 rounded-lg border border-green-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-700 dark:text-gray-200 shadow-sm hover:border-green-300 dark:hover:border-green-500 hover:shadow transition"
+        className="inline-flex items-center gap-2 rounded-lg border border-green-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-xs sm:text-sm text-gray-700 dark:text-gray-200 shadow-sm hover:border-green-300 dark:hover:border-green-500 hover:shadow transition min-h-[44px]"
       >
         <CalendarDays className="h-4 w-4 text-green-600" />
         <span className="font-medium">{rangeLabel}</span>
@@ -125,7 +165,10 @@ export default function DataRangePicker({ withGranularity = false, className = "
       )}
 
       {isOpen && (
-        <div className="absolute left-0 top-[calc(100%+8px)] z-50 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 shadow-2xl">
+        <div
+          style={popupStyle}
+          className="z-50 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-2 sm:p-3 shadow-2xl overflow-y-auto"
+        >
           <div className="mb-3 flex flex-wrap gap-2">
             {PRESETS.map((preset) => (
               <button
@@ -139,15 +182,17 @@ export default function DataRangePicker({ withGranularity = false, className = "
             ))}
           </div>
 
-          <DateRange
-            editableDateInputs
-            onChange={(item) => updateRange(item.selection)}
-            moveRangeOnFirstSelection={false}
-            ranges={state}
-            months={1}
-            direction="horizontal"
-            rangeColors={["#16a34a"]}
-          />
+          <div className="overflow-x-auto">
+            <DateRange
+              editableDateInputs
+              onChange={(item) => updateRange(item.selection)}
+              moveRangeOnFirstSelection={false}
+              ranges={state}
+              months={1}
+              direction="horizontal"
+              rangeColors={["#16a34a"]}
+            />
+          </div>
         </div>
       )}
     </div>
