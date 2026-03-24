@@ -7,6 +7,7 @@ import Analytics from "../pages/Analytics";
 import Settings from "../pages/Settings";
 import AccessDenied from "../pages/AccessDenied";
 import LoginPage from "../pages/LoginPage";
+import ForgotPassword from "../pages/ForgotPassword";
 
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 
@@ -30,6 +31,7 @@ export default function AppRoutes() {
     <Routes>
 
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/" element={<HomeRedirect />} />
 
       <Route element={<Layout />}>
