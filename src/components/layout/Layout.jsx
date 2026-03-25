@@ -8,7 +8,7 @@ export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="flex">
+    <div className="flex min-h-[100svh] bg-emerald-50 md:h-[100svh] md:overflow-hidden">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">
         <Sidebar onClose={() => setSidebarOpen(false)} />
@@ -27,12 +27,12 @@ export default function Layout() {
         {sidebarOpen && <Sidebar onClose={() => setSidebarOpen(false)} />}
       </div>
 
-      <div className="flex-1">
+      <div className="flex min-w-0 flex-1 flex-col">
         <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         <main
           key={location.pathname}
-          className="p-4 md:p-6 min-h-screen page-open-animate eco-animate-bg"
+          className="min-h-0 flex-1 overflow-y-auto p-4 eco-animate-bg md:p-6"
           style={{
             background: "linear-gradient(160deg, #f0fdf4 0%, #dcfce7 42%, #d1fae5 100%)",
           }}

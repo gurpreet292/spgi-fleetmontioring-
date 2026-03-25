@@ -48,7 +48,7 @@ export default function ForgotPassword() {
 
   return (
     <div
-      className="w-full h-screen flex items-center justify-center bg-white text-gray-800 relative overflow-hidden page-open-animate"
+      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-3 py-4 text-gray-800 sm:px-4 lg:h-[100svh]"
       style={{
         backgroundImage: `linear-gradient(135deg, #ecfdf5 0%, #d1fae5 36%, #a7f3d0 68%, #6ee7b7 100%)`,
         backgroundSize: "400% 400%",
@@ -71,11 +71,6 @@ export default function ForgotPassword() {
           0% { opacity: 0; transform: scale(0.92) translateY(14px); }
           60% { opacity: 1; transform: scale(1.02) translateY(0); }
           100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        @keyframes circlePulseOnce {
-          0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-          35% { opacity: 0.38; }
-          100% { opacity: 0; transform: translate(-50%, -50%) scale(1.22); }
         }
       `}</style>
 
@@ -103,18 +98,11 @@ export default function ForgotPassword() {
       />
 
       <div
-        className="absolute top-1/2 left-1/2 w-[340px] h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-emerald-200/80 z-0"
-        style={{
-          animation: "circlePulseOnce 1.1s ease-out 1",
-        }}
-      />
-
-      <div
-        className="w-full max-w-md bg-white/95 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-2xl p-0 border border-white/70 relative z-10 overflow-hidden mx-4"
+        className="relative z-10 mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-white/70 bg-white/95 p-0 shadow-2xl backdrop-blur-xl md:rounded-3xl lg:max-h-[calc(100svh-2rem)]"
         style={{ animation: "cardReveal 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) 1" }}
       >
         {/* Company Header */}
-        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 p-4 md:p-6 text-center">
+        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 p-4 text-center md:p-5">
           <div className="flex items-center justify-center mb-2">
             <img src={logo} alt="Shree Pankaj Green Innovation" className="h-8 md:h-10 w-auto object-contain" />
           </div>
@@ -124,19 +112,19 @@ export default function ForgotPassword() {
         </div>
 
         {/* Content */}
-        <div className="p-4 md:p-8 relative overflow-hidden">
+        <div className="relative overflow-hidden p-4 md:p-6">
           <>
-              <div className="flex justify-center mb-6">
-                <div className="bg-emerald-100 p-4 rounded-full">
-                  <FaLock className="text-3xl text-emerald-600" />
+              <div className="mb-4 flex justify-center md:mb-5">
+                <div className="rounded-full bg-emerald-100 p-3.5 md:p-4">
+                  <FaLock className="text-2xl text-emerald-600 md:text-3xl" />
                 </div>
               </div>
-              <h1 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-2">Forgot Password</h1>
-              <p className="text-center text-xs md:text-sm text-slate-600 mb-8">
+              <h1 className="mb-2 text-center text-2xl font-bold text-slate-800 md:text-3xl">Forgot Password</h1>
+              <p className="mb-6 text-center text-xs text-slate-600 md:mb-7 md:text-sm">
                 Verify your email to reset your password
               </p>
 
-              <form onSubmit={handleResetSubmit} className="space-y-4 md:space-y-5">
+              <form onSubmit={handleResetSubmit} className="space-y-3.5 md:space-y-4">
                 <div>
                   <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-2">Email Address</label>
                   <input
@@ -186,7 +174,7 @@ export default function ForgotPassword() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-2 md:py-3 text-sm md:text-base rounded-lg transition-all shadow-md hover:shadow-lg"
+                  className="w-full rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 py-2 text-sm font-bold text-white shadow-md transition-all hover:from-emerald-700 hover:to-teal-700 hover:shadow-lg md:py-2.5 md:text-base"
                 >
                   Reset Password
                 </button>
@@ -200,7 +188,7 @@ export default function ForgotPassword() {
                     setError("");
                     navigate("/login");
                   }}
-                  className="w-full flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800 transition-all py-2 md:py-3 text-sm md:text-base"
+                  className="flex w-full items-center justify-center gap-2 py-2 text-sm text-slate-600 transition-all hover:text-slate-800 md:py-2.5 md:text-base"
                 >
                   <FaArrowLeft className="text-sm" />
                   Back to Login
@@ -210,7 +198,7 @@ export default function ForgotPassword() {
         </div>
 
         {/* Company Footer */}
-        <div className="border-t border-slate-200 bg-slate-50 px-4 md:px-8 py-3 md:py-4 text-center text-xs text-slate-500">
+        <div className="border-t border-slate-200 bg-slate-50 px-4 py-3 text-center text-xs text-slate-500 md:px-6 md:py-3.5">
           <p>🔒 Enterprise-Grade Security | SPGI Admin Portal</p>
           <p className="mt-1 text-slate-400 text-xs">Your data is protected with end-to-end encryption</p>
         </div>

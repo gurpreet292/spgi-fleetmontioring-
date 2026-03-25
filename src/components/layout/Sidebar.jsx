@@ -3,6 +3,8 @@ import { usePermissions } from "../../hooks/usePermissions";
 import { X } from "lucide-react";
 
 export default function Sidebar({ onClose }) {
+  const role = localStorage.getItem("role");
+  const items = usePermissions(role) || [];
 
   const handleNavClick = () => {
     if (window.innerWidth < 768) {
@@ -23,7 +25,7 @@ export default function Sidebar({ onClose }) {
             <NavLink
               key={item.path}
               to={item.path}
-              onClick={onClose}
+              onClick={handleNavClick}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                   isActive
