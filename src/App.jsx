@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { FilterProvider } from './context/FilterContext';
@@ -19,12 +18,5 @@ const App = () => {
 </ErrorBoundary>
   );
 };
-=======
-import AppRoutes from "./app/routes";
-
-function App() {
-  return <AppRoutes />;
-}
->>>>>>> adminPanel1/main
 
 export default App;

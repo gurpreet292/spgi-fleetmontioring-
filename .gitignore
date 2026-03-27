@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 node_modules/
 dist/
+dist-ssr
 .DS_Store
-=======
->>>>>>> adminPanel1/main
+
 # Logs
 logs
 *.log
@@ -13,16 +12,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
 *.local
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj

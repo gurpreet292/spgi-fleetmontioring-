@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../components/layout/MainLayout';
 import Loader from '../components/common/Loader';
 
@@ -12,20 +12,18 @@ const WasteAnalytics = lazy(() => import('../pages/WasteAnalytics'));
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Loader message="Loading page..." />}>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<OverviewPage />} />
-            <Route path="waste-analytics" element={<WasteAnalytics />} />
-            <Route path="recycling-metrics" element={<RecyclingMetricsPage />} />
-            <Route path="fleet-monitoring" element={<FleetMonitoring />} />
-            <Route path="reports" element={<Reports />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Suspense fallback={<Loader message="Loading page..." />}>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<OverviewPage />} />
+          <Route path="waste-analytics" element={<WasteAnalytics />} />
+          <Route path="recycling-metrics" element={<RecyclingMetricsPage />} />
+          <Route path="fleet-monitoring" element={<FleetMonitoring />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
 
