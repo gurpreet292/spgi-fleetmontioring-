@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 node_modules/
 dist/
 .DS_Store
+=======
+>>>>>>> adminPanel1/main
 # Logs
 logs
 *.log
