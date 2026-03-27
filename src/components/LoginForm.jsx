@@ -95,13 +95,8 @@ export default function LoginForm() {
 
   login(userData);
 
-  const routes = {
-    Admin: "/dashboard",
-    Analyst: "/analytics",
-    "Manager": "/operations"
-  };
-
-  navigate(routes[form.role] || "/dashboard");
+  // Redirect to dashboard - role-based features will be filtered by sidebar
+  navigate("/");
 };
 
    const handleForgotPassword = () => {

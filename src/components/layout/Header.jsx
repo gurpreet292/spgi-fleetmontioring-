@@ -1,23 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Menu,
   Bell,
-  User,
   Moon,
   Sun,
   ChevronDown,
-  Pencil,
-  Wallet,
-  Crown,
-  Headphones,
+  LogOut,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../hooks/useAuth";
+import logo from "../../assets/spgi-logo.png";
 
 const Header = ({ toggleSidebar, toggleMobileSidebar }) => {
-  const [showNotification, setShowNotification] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-
+  const profileMenuRef = useRef(null);
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+
+  const roleName = user?.role || localStorage.getItem("role") || "Guest";
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setShowProfile(false);
+      }
+    };
+
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        setShowProfile(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
 
   return (
     <header className="h-16 bg-white dark:bg-gray-800 border-b border-green-200 dark:border-gray-700 px-4 flex items-center justify-between shadow-sm shrink-0 z-10">
@@ -41,9 +70,15 @@ const Header = ({ toggleSidebar, toggleMobileSidebar }) => {
           <Menu size={24} />
         </button>
 
-        <h1 className="text-xl font-semibold text-green-800 dark:text-green-400 hidden sm:block">
-          Dashboard
-        </h1>
+        <div className="hidden sm:flex items-center gap-2">
+          <img src={logo} alt="SPGI" className="h-8 w-8 object-contain" />
+          <div>
+            <p className="text-sm font-semibold text-green-800 dark:text-green-400">
+              Shree Pankaj Green Innovation
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-300 capitalize">{roleName} Panel</p>
+          </div>
+        </div>
       </div>
 
       {/* RIGHT SECTION */}
@@ -59,7 +94,7 @@ const Header = ({ toggleSidebar, toggleMobileSidebar }) => {
 
         {/* Notification */}
         <button
-          onClick={() => setShowNotification(!showNotification)}
+          onClick={() => setShowProfile(false)}
           className="p-2 hover:bg-green-50 dark:hover:bg-gray-700 rounded relative"
         >
           <Bell size={20} />
@@ -67,57 +102,40 @@ const Header = ({ toggleSidebar, toggleMobileSidebar }) => {
         </button>
 
         {/* Profile */}
-        <div className="relative">
+        <div ref={profileMenuRef} className="relative">
           <div
             onClick={() => setShowProfile(!showProfile)}
-            className="flex items-center gap-2 cursor-pointer bg-white dark:bg-gray-800 px-3 py-1 rounded-full shadow hover:shadow-md transition"
+            className="flex items-center gap-2 cursor-pointer rounded-full border border-emerald-100 bg-white px-3 py-1 shadow-sm transition hover:border-emerald-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
-            <img
-              src="https://i.pravatar.cc/40"
-              alt="profile"
-              className="w-8 h-8 rounded-full"
-            />
+            <img src={logo} alt="profile" className="w-8 h-8 rounded-full object-contain bg-white" />
 
             <div className="text-left hidden md:block">
-              <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-                Navjot Kaur
-              </p>
-              <p className="text-xs text-gray-500">
-                navjot@gmail.com
-              </p>
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{user?.name || "User"}</p>
+              <p className="text-xs text-gray-500 capitalize">{roleName}</p>
             </div>
 
-            <ChevronDown size={16} />
+            <ChevronDown
+              size={16}
+              className={`transition-transform duration-200 ${showProfile ? "rotate-180" : "rotate-0"}`}
+            />
           </div>
 
           {showProfile && (
-            <div className="absolute right-0 top-12 w-64 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-2">
-              
-              <button className="flex items-center gap-3 w-full px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                <User size={18} />
-                Profile
-              </button>
+            <div className="absolute right-0 top-12 z-40 w-72 overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-xl shadow-emerald-100/60 dark:border-gray-700 dark:bg-gray-800 dark:shadow-black/30">
+              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-4 py-3 text-white">
+                <p className="text-sm font-semibold">{user?.name || "User"}</p>
+                <p className="text-xs capitalize text-emerald-50">{roleName}</p>
+              </div>
 
-              <button className="flex items-center gap-3 w-full px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                <Pencil size={18} />
-                Edit Profile
+              <div className="p-2">
+              <button
+                onClick={handleLogout}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-red-600 transition hover:bg-red-50 dark:hover:bg-gray-700"
+              >
+                <LogOut size={18} />
+                <span className="font-medium">Logout</span>
               </button>
-
-              <button className="flex items-center gap-3 w-full px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                <Wallet size={18} />
-                Wallet
-              </button>
-
-              <button className="flex items-center gap-3 w-full px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                <Crown size={18} />
-                Upgrade Plan
-              </button>
-
-              <button className="flex items-center gap-3 w-full px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                <Headphones size={18} />
-                Help Center
-              </button>
-
+              </div>
             </div>
           )}
         </div>

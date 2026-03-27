@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -9,27 +9,37 @@ import {
   Settings,
   Leaf,
 } from "lucide-react";
+import { canAccessFeature } from "../../utils/roles";
 
-const mainNavItems = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Waste Analytics", url: "/waste-analytics", icon: Trash2 },
-  { title: "Fleet Monitoring", url: "/fleet-monitoring", icon: Truck },
-  { title: "Recycling Metrics", url: "/recycling-metrics", icon: Recycle },
+const allMainNavItems = [
+  { title: "Dashboard", url: "/", icon: LayoutDashboard, key: "dashboard" },
+  { title: "Waste Analytics", url: "/waste-analytics", icon: Trash2, key: "wasteAnalytics" },
+  { title: "Fleet Monitoring", url: "/fleet-monitoring", icon: Truck, key: "fleetMonitoring" },
+  { title: "Recycling Metrics", url: "/recycling-metrics", icon: Recycle, key: "recyclingMetrics" },
 ];
 
-const secondaryNavItems = [
-  { title: "Reports", url: "/reports", icon: FileText },
-  { title: "Settings", url: "/settings", icon: Settings },
+const allSecondaryNavItems = [
+  { title: "Reports", url: "/reports", icon: FileText, key: "reports" },
+  { title: "Settings", url: "/settings", icon: Settings, key: "settings" },
 ];
 
 const Sidebar = ({ isOpen, isMobileOpen, closeMobile }) => {
   const { pathname } = useLocation();
+  const role = localStorage.getItem("role");
+
+  const mainNavItems = useMemo(() => {
+    return allMainNavItems.filter((item) => canAccessFeature(role, item.key));
+  }, [role]);
+
+  const secondaryNavItems = useMemo(() => {
+    return allSecondaryNavItems.filter((item) => canAccessFeature(role, item.key));
+  }, [role]);
 
   const renderNavItems = (items) =>
     items.map(({ title, url, icon: Icon }) => {
       return (
         <NavLink
-          key={title}
+          key={url}
           to={url}
           onClick={closeMobile}
           className={({ isActive }) =>
@@ -69,10 +79,10 @@ const Sidebar = ({ isOpen, isMobileOpen, closeMobile }) => {
           {isOpen && (
             <div>
               <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                GreenTrack
+                Shree Pankaj Green
               </span>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Analytics Dashboard
+                Waste Management Portal
               </p>
             </div>
           )}

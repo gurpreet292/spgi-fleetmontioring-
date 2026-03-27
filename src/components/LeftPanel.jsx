@@ -61,7 +61,7 @@ export default function LeftPanel() {
             className="text-lg font-semibold tracking-widest uppercase"
             style={{ color: "rgba(255,255,255,0.85)" }}
           >
-            GreenInnovations
+            Shree Pankaj Green Innovation
           </span>
         </div>
 
